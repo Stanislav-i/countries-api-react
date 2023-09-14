@@ -6,6 +6,14 @@
   box-sizing: border-box;
 }
 
+ul,
+ol,
+li {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
 :root {
   /*typography*/
   --family: 'Nunito Sans', sans-serif;
