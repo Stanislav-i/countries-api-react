@@ -12,14 +12,18 @@ import styled from 'styled-components';
 import { Container } from 'components/Container';
 
 const List = styled.section`
-    width: 380px;
+    /* width: 380px; */
     padding: 2rem 0;
-
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
 
-    @media (min-width: 767px) {
+    @media (min-width: 380px) {
+      width: 320px;
+    }
+
+    @media (min-width: 768px) {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
@@ -41,7 +45,7 @@ export const HomePage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestCountriesThunk());
+    dispatch(requestCountriesThunk("asia"));
   }, [dispatch]);
 
   const showCountires = Array.isArray(allCountries) && allCountries.length > 0;
@@ -54,7 +58,7 @@ export const HomePage = () => {
       {error && <p>Error occured... Error is {error}</p>}
       <List>
         {showCountires &&
-          allCountries.map(({ name, population, region, capital, flags }) => {
+          allCountries.map(({ name, population, region, capital, flags, fifa}) => {
             if(name.official === 
                 "Russian Federation") 
             return null
@@ -66,6 +70,7 @@ export const HomePage = () => {
               region={region}
               capital={capital}
               flag={flags.png}
+              fifa={fifa}
             />
           </li>
 })}

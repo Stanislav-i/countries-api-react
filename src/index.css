@@ -12,6 +12,14 @@ li {
   margin: 0;
   padding-left: 0;
   list-style: none;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  font-family: var(--family);
+  color: var(--color-text);
+  font-weight: var(--fw-light);
 }
 
 :root {
@@ -27,7 +35,7 @@ li {
   --radii: 0.5rem;
 }
 
-body[data-theme='light'] {
+body[data-theme='light'], a[data-theme='light'] {
   --color-text: hsl(200, 15%, 8%);
   --color-bg: hsl(0, 0%, 98%);
   --color-ui-base: hsl(0, 0%, 100%);
@@ -35,9 +43,9 @@ body[data-theme='light'] {
   --shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-body[data-theme='dark'] {
+body[data-theme='dark'], a[data-theme='dark'] {
   --color-text: hsl(0, 0%, 100%);
-  --color-bg: hsl(207, 26%, 17%);
+  --color-bg: hsl(241, 67%, 19%);
   --color-ui-base: hsl(209, 23%, 22%);
 
   --shadow: rgba(245, 245, 245, 0.2) 0px 0px 8px;
@@ -50,3 +58,4 @@ body {
   font-weight: var(--fw-light);
   background-color: var(--color-bg);
 }
+

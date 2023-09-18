@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.a.attrs({
-  href: '/',
+  href: '/countries-api-react',
 })`
   color: var(--color-text);
   font-size: var(--fv-sm);
@@ -45,7 +45,7 @@ export const Header = () => {
     <HeaderEl>
       <Container>
         <Wrapper>
-          <Title>Your countries</Title>
+          <Title>Home</Title>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === 'light' ? (
               <IoMoonOutline size="14px" />
