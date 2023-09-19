@@ -7,9 +7,11 @@ import {
   selectcountriesIsLoading,
 } from 'redux/countryListSlice';
 import CountryCard from 'components/CountryCard';
+import UserQueries from 'components/UserQueries';
 import Loader from 'components/Loader';
 import styled from 'styled-components';
 import { Container } from 'components/Container';
+import { selectUserRegion } from 'redux/userQueriesSlice';
 
 const List = styled.section`
     /* width: 380px; */
@@ -40,13 +42,15 @@ const List = styled.section`
 
 export const HomePage = () => {
   const allCountries = useSelector(selectAllCountries);
+  const region = useSelector(selectUserRegion);
   const isLoading = useSelector(selectcountriesIsLoading);
   const error = useSelector(selectcountriesError);
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
-    dispatch(requestCountriesThunk("asia"));
-  }, [dispatch]);
+    dispatch(requestCountriesThunk(region));
+  }, [dispatch, region]);
 
   const showCountires = Array.isArray(allCountries) && allCountries.length > 0;
 
@@ -54,8 +58,9 @@ export const HomePage = () => {
 
   return (
     <Container>
-        {isLoading && <Loader />}
+      {isLoading && <Loader />}
       {error && <p>Error occured... Error is {error}</p>}
+      <UserQueries />
       <List>
         {showCountires &&
           allCountries.map(({ name, population, region, capital, flags, fifa}) => {
