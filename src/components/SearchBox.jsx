@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserSearchQuery, setSearchValue } from 'redux/userQueriesSlice';
 import styled from 'styled-components';
 
 const InputContainer = styled.label`
@@ -30,10 +32,17 @@ const Input = styled.input.attrs({
 `;
 
 const SearchBox = () => {
+    const userSearchQuery = useSelector(selectUserSearchQuery);
+    const dispatch = useDispatch();
+
+    const handleUserSearchQuery = e => {
+        dispatch(setSearchValue(e.target.value));
+    }
+
     return (
         <InputContainer>
 
-        <Input />
+        <Input type='text' value={userSearchQuery} onChange={handleUserSearchQuery}/>
       </InputContainer>
     );
 };

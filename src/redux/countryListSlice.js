@@ -5,9 +5,9 @@ axios.defaults.baseURL = 'https://restcountries.com/v3.1';
 
 export const requestCountriesThunk = createAsyncThunk(
     'countries/getAll',
-    async (region, thunkApi) => {
+    async (_, thunkApi) => {
         try {
-            const {data} = await axios.get(`/region/${region}`);
+            const {data} = await axios.get(`/all`);
             return data
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);

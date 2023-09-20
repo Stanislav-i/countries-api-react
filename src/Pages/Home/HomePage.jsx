@@ -11,7 +11,7 @@ import UserQueries from 'components/UserQueries';
 import Loader from 'components/Loader';
 import styled from 'styled-components';
 import { Container } from 'components/Container';
-import { selectUserRegion } from 'redux/userQueriesSlice';
+import { selectUserRegion, selectUserSearchQuery } from 'redux/userQueriesSlice';
 
 const List = styled.section`
     /* width: 380px; */
@@ -43,18 +43,28 @@ const List = styled.section`
 export const HomePage = () => {
   const allCountries = useSelector(selectAllCountries);
   const region = useSelector(selectUserRegion);
+  const userSearchQuery = useSelector(selectUserSearchQuery);
   const isLoading = useSelector(selectcountriesIsLoading);
   const error = useSelector(selectcountriesError);
   const dispatch = useDispatch();
   
 
   useEffect(() => {
-    dispatch(requestCountriesThunk(region));
-  }, [dispatch, region]);
+    dispatch(requestCountriesThunk());
+  }, [dispatch]);
+  // console.log(allCountries);
 
-  const showCountires = Array.isArray(allCountries) && allCountries.length > 0;
+  const countryByRegion = allCountries?.filter(country => country.region === region);
+  
+  const getSearchedCountries = () => {
+    const normalizedFilter = userSearchQuery.toLocaleLowerCase();
+    return allCountries?.filter(country =>
+      country.name.official.toLocaleLowerCase().includes(normalizedFilter)
+    );
+  };
 
-  console.log(allCountries);
+  const showCountires = Array.isArray(allCountries) && allCountries.length > 0 && !userSearchQuery;
+  const showSearchedCountries = Array.isArray(allCountries) && allCountries.length > 0 && userSearchQuery;
 
   return (
     <Container>
@@ -63,7 +73,7 @@ export const HomePage = () => {
       <UserQueries />
       <List>
         {showCountires &&
-          allCountries.map(({ name, population, region, capital, flags, fifa}) => {
+          countryByRegion.map(({ name, population, region, capital, flags, fifa}) => {
             if(name.official === 
                 "Russian Federation") 
             return null
@@ -79,6 +89,28 @@ export const HomePage = () => {
             />
           </li>
 })}
+
+{showSearchedCountries &&
+          getSearchedCountries().map(({ name, population, region, capital, flags, fifa}) => {
+            if(name.official === 
+                "Russian Federation") 
+            return null
+            
+           return <li key={name.official}>
+            <CountryCard
+              name={name.official}
+              population={population}
+              region={region}
+              capital={capital}
+              flag={flags.png}
+              fifa={fifa}
+            />
+          </li>
+})}   
+          
+
+
+
       </List>
     </Container>
   );

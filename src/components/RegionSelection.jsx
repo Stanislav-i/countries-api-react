@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setRegion } from 'redux/userQueriesSlice';
-// Oceania Africa Americas 
+
 const RegionSelection = () => {
     const dispatch = useDispatch();
 
