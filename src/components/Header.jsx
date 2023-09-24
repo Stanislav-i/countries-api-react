@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { Container } from './Container';
-import { IoMoonOutline, IoMoon } from 'react-icons/io5';
+import { IoMoonOutline, IoSunny } from 'react-icons/io5';
+import { changeTheme, selectTheme } from 'redux/themeSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -33,26 +35,30 @@ const ModeSwitcher = styled.div`
 `;
 
 export const Header = () => {
-  const [theme, setTheme] = useState('light');
-
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
-
+  const theme = useSelector(selectTheme);
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
+
+  const handleChange = () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    dispatch(changeTheme(nextTheme))
+  }
 
   return (
     <HeaderEl>
       <Container>
         <Wrapper>
           <Title>Home</Title>
-          <ModeSwitcher onClick={toggleTheme}>
+          <ModeSwitcher onClick={handleChange}>
             {theme === 'light' ? (
               <IoMoonOutline size="14px" />
             ) : (
-              <IoMoon size="14px" />
+              <IoSunny size="14px" />
             )}
-            <span style={{ marginLeft: '0.75rem' }}>{theme === 'light' ? 'dark' : 'light'} Theme</span>
+            <span style={{ marginLeft: '0.75rem' }}>{theme === 'light' ? 'dark' : 'light'} Mode</span>
           </ModeSwitcher>
         </Wrapper>
       </Container>

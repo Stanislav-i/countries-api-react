@@ -8,6 +8,7 @@ const InputContainer = styled.label`
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
+  height: 35px;
 
   border-radius: var(--radii);
   box-shadow: var(--shadow);

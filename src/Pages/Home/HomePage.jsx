@@ -78,9 +78,9 @@ export const HomePage = () => {
                 "Russian Federation") 
             return null
             
-           return <li key={name.official}>
+           return <li key={name.common}>
             <CountryCard
-              name={name.official}
+              name={name.common}
               population={population}
               region={region}
               capital={capital}
