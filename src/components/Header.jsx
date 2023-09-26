@@ -4,6 +4,7 @@ import { Container } from './Container';
 import { IoMoonOutline, IoSunny } from 'react-icons/io5';
 import { changeTheme, selectTheme } from 'redux/themeSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -17,8 +18,8 @@ const Wrapper = styled.div`
   padding: 2rem 0;
 `;
 
-const Title = styled.a.attrs({
-  href: '/countries-api-react',
+const Title = styled(Link).attrs({
+  to: '/',
 })`
   color: var(--color-text);
   font-size: var(--fv-sm);

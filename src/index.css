@@ -27,6 +27,7 @@ a {
   --family: 'Nunito Sans', sans-serif;
   --fs-sm: 14px;
   --fs-md: 16px;
+  --fs-lg: 18px;
   --fw-light: 300;
   --fw-normal: 600;
   --fw-bold: 800;
@@ -45,7 +46,7 @@ body[data-theme='light'], a[data-theme='light'] {
 
 body[data-theme='dark'], a[data-theme='dark'] {
   --color-text: hsl(0, 0%, 100%);
-  --color-bg: hsl(316, 57%, 12%);
+  --color-bg: hsl(240, 2%, 20%);
   --color-ui-base: hsl(209, 23%, 22%);
 
   --shadow: rgba(245, 245, 245, 0.2) 0px 0px 8px;

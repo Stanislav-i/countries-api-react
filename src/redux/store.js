@@ -13,6 +13,7 @@ import {
     REGISTER,
   } from 'redux-persist';
   import storage from 'redux-persist/lib/storage';
+import { countryInfoReducer } from "./countryInfoSlice";
   
   const ThemePersistConfig = {
     key: 'theme',
@@ -24,6 +25,7 @@ export const store = configureStore({
         countries: countriesListReducer,
         userQueries: userQueriesReducer,
         theme: persistReducer(ThemePersistConfig, themeReducer),
+        countryInfo: countryInfoReducer,
     },
     middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

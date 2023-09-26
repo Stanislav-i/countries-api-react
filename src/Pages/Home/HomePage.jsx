@@ -50,16 +50,17 @@ export const HomePage = () => {
   
 
   useEffect(() => {
+    if (allCountries)
+    { return};
     dispatch(requestCountriesThunk());
-  }, [dispatch]);
-  // console.log(allCountries);
+  }, [allCountries, dispatch]);
 
   const countryByRegion = allCountries?.filter(country => country.region === region);
   
   const getSearchedCountries = () => {
     const normalizedFilter = userSearchQuery.toLocaleLowerCase();
     return allCountries?.filter(country =>
-      country.name.official.toLocaleLowerCase().includes(normalizedFilter)
+      country.name.common.toLocaleLowerCase().includes(normalizedFilter)
     );
   };
 
@@ -81,6 +82,7 @@ export const HomePage = () => {
            return <li key={name.common}>
             <CountryCard
               name={name.common}
+              pageName={name.official}
               population={population}
               region={region}
               capital={capital}
@@ -96,9 +98,10 @@ export const HomePage = () => {
                 "Russian Federation") 
             return null
             
-           return <li key={name.official}>
+           return <li key={name.common}>
             <CountryCard
-              name={name.official}
+              name={name.common}
+              pageName={name.official}
               population={population}
               region={region}
               capital={capital}

@@ -51,9 +51,9 @@ const CardList = styled.ul`
   text-align: center;
 `;
 
-export const CountryCard = ({name, population, region, capital, flag}) => {
+export const CountryCard = ({name, pageName, population, region, capital, flag}) => {
     return (
-      <Link to={`/countryinfo/${name}`}>
+      <Link to={`/countryinfo/${pageName}`}>
         <Wrapper>
         <CardImg src={flag} alt={name} />
         <CardInfo>
