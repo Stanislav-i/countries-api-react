@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   margin: 0 auto;
 
   @media (min-width: 380px) {
-      width: 320px;
-    }
+    width: 320px;
+  }
 
-    @media (min-width: 768px) {
+  @media (min-width: 768px) {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
@@ -24,17 +24,16 @@ const Wrapper = styled.div`
   }
 
   @media (min-width: 1024px) {
-
   }
 `;
 
 export const UserQueries = () => {
-    return (
-        <Wrapper>
-           <SearchBox /> 
-           <RegionSelection />
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <SearchBox />
+      <RegionSelection />
+    </Wrapper>
+  );
 };
 
 export default UserQueries;

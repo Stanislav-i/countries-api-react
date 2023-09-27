@@ -11,21 +11,24 @@ import UserQueries from 'components/UserQueries';
 import Loader from 'components/Loader';
 import styled from 'styled-components';
 import { Container } from 'components/Container';
-import { selectUserRegion, selectUserSearchQuery } from 'redux/userQueriesSlice';
+import {
+  selectUserRegion,
+  selectUserSearchQuery,
+} from 'redux/userQueriesSlice';
 
 const List = styled.section`
-    /* width: 380px; */
-    padding: 2rem 0;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 2rem;
+  /* width: 380px; */
+  padding: 2rem 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
 
-    @media (min-width: 380px) {
-      width: 320px;
-    }
+  @media (min-width: 380px) {
+    width: 320px;
+  }
 
-    @media (min-width: 768px) {
+  @media (min-width: 768px) {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
@@ -39,7 +42,6 @@ const List = styled.section`
   }
 `;
 
-
 export const HomePage = () => {
   const allCountries = useSelector(selectAllCountries);
   const region = useSelector(selectUserRegion);
@@ -47,16 +49,18 @@ export const HomePage = () => {
   const isLoading = useSelector(selectcountriesIsLoading);
   const error = useSelector(selectcountriesError);
   const dispatch = useDispatch();
-  
 
   useEffect(() => {
-    if (allCountries)
-    { return};
+    if (allCountries) {
+      return;
+    }
     dispatch(requestCountriesThunk());
   }, [allCountries, dispatch]);
 
-  const countryByRegion = allCountries?.filter(country => country.region === region);
-  
+  const countryByRegion = allCountries?.filter(
+    country => country.region === region
+  );
+
   const getSearchedCountries = () => {
     const normalizedFilter = userSearchQuery.toLocaleLowerCase();
     return allCountries?.filter(country =>
@@ -64,8 +68,10 @@ export const HomePage = () => {
     );
   };
 
-  const showCountires = Array.isArray(allCountries) && allCountries.length > 0 && !userSearchQuery;
-  const showSearchedCountries = Array.isArray(allCountries) && allCountries.length > 0 && userSearchQuery;
+  const showCountires =
+    Array.isArray(allCountries) && allCountries.length > 0 && !userSearchQuery;
+  const showSearchedCountries =
+    Array.isArray(allCountries) && allCountries.length > 0 && userSearchQuery;
 
   return (
     <Container>
@@ -74,46 +80,46 @@ export const HomePage = () => {
       <UserQueries />
       <List>
         {showCountires &&
-          countryByRegion.map(({ name, population, region, capital, flags, fifa}) => {
-            if(name.official === 
-                "Russian Federation") 
-            return null
-            
-           return <li key={name.common}>
-            <CountryCard
-              name={name.common}
-              pageName={name.official}
-              population={population}
-              region={region}
-              capital={capital}
-              flag={flags.png}
-              fifa={fifa}
-            />
-          </li>
-})}
+          countryByRegion.map(
+            ({ name, population, region, capital, flags, fifa }) => {
+              if (name.official === 'Russian Federation') return null;
 
-{showSearchedCountries &&
-          getSearchedCountries().map(({ name, population, region, capital, flags, fifa}) => {
-            if(name.official === 
-                "Russian Federation") 
-            return null
-            
-           return <li key={name.common}>
-            <CountryCard
-              name={name.common}
-              pageName={name.official}
-              population={population}
-              region={region}
-              capital={capital}
-              flag={flags.png}
-              fifa={fifa}
-            />
-          </li>
-})}   
-          
+              return (
+                <li key={name.common}>
+                  <CountryCard
+                    name={name.common}
+                    pageName={name.official}
+                    population={population}
+                    region={region}
+                    capital={capital}
+                    flag={flags.png}
+                    fifa={fifa}
+                  />
+                </li>
+              );
+            }
+          )}
 
+        {showSearchedCountries &&
+          getSearchedCountries().map(
+            ({ name, population, region, capital, flags, fifa }) => {
+              if (name.official === 'Russian Federation') return null;
 
-
+              return (
+                <li key={name.common}>
+                  <CountryCard
+                    name={name.common}
+                    pageName={name.official}
+                    population={population}
+                    region={region}
+                    capital={capital}
+                    flag={flags.png}
+                    fifa={fifa}
+                  />
+                </li>
+              );
+            }
+          )}
       </List>
     </Container>
   );

@@ -23,7 +23,6 @@ a {
 }
 
 :root {
-  /*typography*/
   --family: 'Nunito Sans', sans-serif;
   --fs-sm: 14px;
   --fs-md: 16px;
@@ -31,12 +30,11 @@ a {
   --fw-light: 300;
   --fw-normal: 600;
   --fw-bold: 800;
-
-  /*Other*/
   --radii: 0.5rem;
 }
 
-body[data-theme='light'], a[data-theme='light'] {
+body[data-theme='light'],
+a[data-theme='light'] {
   --color-text: hsl(200, 15%, 8%);
   --color-bg: hsl(0, 0%, 98%);
   --color-ui-base: hsl(0, 0%, 100%);
@@ -44,7 +42,8 @@ body[data-theme='light'], a[data-theme='light'] {
   --shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-body[data-theme='dark'], a[data-theme='dark'] {
+body[data-theme='dark'],
+a[data-theme='dark'] {
   --color-text: hsl(0, 0%, 100%);
   --color-bg: hsl(240, 2%, 20%);
   --color-ui-base: hsl(209, 23%, 22%);
@@ -59,4 +58,3 @@ body {
   font-weight: var(--fw-light);
   background-color: var(--color-bg);
 }
-

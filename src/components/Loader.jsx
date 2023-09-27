@@ -11,7 +11,7 @@ export const Loader = () => {
         alignItems: 'center',
       }}
     >
-        <HashLoader color="#a034a2" />
+      <HashLoader color="#a034a2" />
     </div>
   );
 };

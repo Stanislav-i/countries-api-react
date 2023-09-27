@@ -4,15 +4,15 @@ import { setRegion } from 'redux/userQueriesSlice';
 import styled from 'styled-components';
 
 const RadioButtonForm = styled.form`
-    text-align: center;
+  text-align: center;
 `;
 
 const RadioButtonSection = styled.div`
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-around;
-gap: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
 `;
 
 const RbDiv = styled.span`
@@ -32,17 +32,17 @@ const RbNane = styled.span`
 `;
 
 const RegionSelection = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const onOptionChange = e => {
-        dispatch(setRegion(e.target.value))
-    }
-    
-    return (
-<RadioButtonForm >
-          <h3>Choose region</h3>
-          <RadioButtonSection>
-          <label>
+  const onOptionChange = e => {
+    dispatch(setRegion(e.target.value));
+  };
+
+  return (
+    <RadioButtonForm>
+      <h3>Choose region</h3>
+      <RadioButtonSection>
+        <label>
           <RbDiv>
             <RbNane>Europe</RbNane>
             <input
@@ -52,9 +52,9 @@ const RegionSelection = () => {
               onChange={onOptionChange}
               defaultChecked
             />
-            </RbDiv>
-          </label>
-          <label>
+          </RbDiv>
+        </label>
+        <label>
           <RbDiv>
             <RbNane>Asia</RbNane>
             <input
@@ -63,44 +63,44 @@ const RegionSelection = () => {
               value="Asia"
               onChange={onOptionChange}
             />
-            </RbDiv>
-          </label>
-          <label>
+          </RbDiv>
+        </label>
+        <label>
           <RbDiv>
-          <RbNane>Oceania</RbNane>
+            <RbNane>Oceania</RbNane>
             <input
               type="radio"
               name="region"
               value="Oceania"
               onChange={onOptionChange}
             />
-            </RbDiv>
-          </label>
-          <label>
+          </RbDiv>
+        </label>
+        <label>
           <RbDiv>
-          <RbNane>Africa</RbNane>
+            <RbNane>Africa</RbNane>
             <input
               type="radio"
               name="region"
               value="Africa"
               onChange={onOptionChange}
             />
-            </RbDiv>
-          </label>
-          <label>
+          </RbDiv>
+        </label>
+        <label>
           <RbDiv>
-          <RbNane>Americas</RbNane>
+            <RbNane>Americas</RbNane>
             <input
               type="radio"
               name="region"
               value="Americas"
               onChange={onOptionChange}
             />
-            </RbDiv>
-          </label>
-          </RadioButtonSection>
-      </RadioButtonForm>
-    );
+          </RbDiv>
+        </label>
+      </RadioButtonSection>
+    </RadioButtonForm>
+  );
 };
 
 export default RegionSelection;

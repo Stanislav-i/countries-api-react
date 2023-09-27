@@ -38,15 +38,15 @@ const ModeSwitcher = styled.div`
 export const Header = () => {
   const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
   const handleChange = () => {
-    const nextTheme = theme === "light" ? "dark" : "light";
-    dispatch(changeTheme(nextTheme))
-  }
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    dispatch(changeTheme(nextTheme));
+  };
 
   return (
     <HeaderEl>
@@ -59,7 +59,9 @@ export const Header = () => {
             ) : (
               <IoSunny size="14px" />
             )}
-            <span style={{ marginLeft: '0.75rem' }}>{theme === 'light' ? 'dark' : 'light'} Mode</span>
+            <span style={{ marginLeft: '0.75rem' }}>
+              {theme === 'light' ? 'dark' : 'light'} Mode
+            </span>
           </ModeSwitcher>
         </Wrapper>
       </Container>

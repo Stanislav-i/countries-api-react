@@ -23,7 +23,7 @@ const InputContainer = styled.label`
 
 const Input = styled.input.attrs({
   type: 'search',
-  placeholder: 'Search for a country...',
+  placeholder: 'Country search',
 })`
   margin-left: 2rem;
   border: none;
@@ -33,19 +33,22 @@ const Input = styled.input.attrs({
 `;
 
 const SearchBox = () => {
-    const userSearchQuery = useSelector(selectUserSearchQuery);
-    const dispatch = useDispatch();
+  const userSearchQuery = useSelector(selectUserSearchQuery);
+  const dispatch = useDispatch();
 
-    const handleUserSearchQuery = e => {
-        dispatch(setSearchValue(e.target.value));
-    }
+  const handleUserSearchQuery = e => {
+    dispatch(setSearchValue(e.target.value));
+  };
 
-    return (
-        <InputContainer>
-
-        <Input type='text' value={userSearchQuery} onChange={handleUserSearchQuery}/>
-      </InputContainer>
-    );
+  return (
+    <InputContainer>
+      <Input
+        type="text"
+        value={userSearchQuery}
+        onChange={handleUserSearchQuery}
+      />
+    </InputContainer>
+  );
 };
 
 export default SearchBox;

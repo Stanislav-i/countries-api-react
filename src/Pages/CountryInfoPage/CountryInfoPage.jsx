@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container } from 'components/Container';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -10,6 +10,7 @@ import {
   selectCountryInfoIsLoading,
 } from 'redux/countryInfoSlice';
 import Loader from 'components/Loader';
+import { requestCountriesThunk, selectAllCountries } from 'redux/countryListSlice';
 
 const Wrapper = styled.div`
   display: flex;
@@ -77,14 +78,24 @@ export const CountryInfoPage = () => {
   const countryInfoLoading = useSelector(selectCountryInfoIsLoading);
   const countryInfoError = useSelector(selectCountryInfoError);
   const dispatch = useDispatch();
+  const allCountries = useSelector(selectAllCountries);
   let currencies = [];
 
   useEffect(() => {
-    dispatch(requestCountryInfoThunk(name));
-  }, [name, dispatch]);
+    if (!countryInfo || countryInfo[0].name?.official !== name) {
+      dispatch(requestCountryInfoThunk(name));
+    }
+    
+    if (!allCountries) {
+      dispatch(requestCountriesThunk())
+    }
+  }, [name, countryInfo, allCountries, dispatch]);
 
   const showCountryInfo =
-    Array.isArray(countryInfo) && countryInfo.length === 1;
+    Array.isArray(countryInfo) &&
+    countryInfo.length === 1 &&
+    countryInfo[0].name?.official === name &&
+    Array.isArray(allCountries);
 
   if (showCountryInfo) {
     for (const key in countryInfo[0].currencies) {
@@ -137,17 +148,23 @@ export const CountryInfoPage = () => {
                 {countryInfo[0].tld?.map(dom => {
                   return <StyledLi key={dom}> {dom}</StyledLi>;
                 })}
-             
-            </InfoText>
+              </InfoText>
             </ul>
             <ul>
               <InfoText>
                 <b>Borders On:</b>
-                {(countryInfo[0].borders) ? (countryInfo[0].borders.map(dom => {
-                  return <StyledLi key={dom}> {dom}</StyledLi>})) : (<span> This country does not border anyone</span>)
-                }
-             
-            </InfoText>
+                {countryInfo[0].borders ? (
+                  countryInfo[0].borders.map(border => {
+                    const borderCountry = allCountries?.filter(country=>country.cca3 === border);
+                    if (borderCountry[0].name.official === 'Russian Federation') {
+                      return null
+                    }
+                    return <StyledLi key={border}> <Link to={`/countryinfo/${borderCountry[0].name.official}`}>{border}</Link></StyledLi>;
+                  })
+                ) : (
+                  <span> This country does not border anyone</span>
+                )}
+              </InfoText>
             </ul>
           </InfoSection>
         </Wrapper>
