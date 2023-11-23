@@ -22,4 +22,4 @@
 ### Frameworks:
 
 [![style-Components](https://img.shields.io/static/v1?label=&message=style-Components&color=orange)](https://)
-[![modern-normalize](https://img.shields.io/static/v1?label=&message=modern-normolize&color=orange)](https://)
+[![modern-normalize](https://img.shields.io/static/v1?label=&message=modern-normalize&color=orange)](https://)
